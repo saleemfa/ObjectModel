@@ -52,7 +52,7 @@ public class ShoppingTest {
         for some reasons, the action is resetting login page. need more investigation
 
         loginPage.setUserName("saleemfa@mail.com");
-        loginPage.setPassword("vsnet7com");
+        loginPage.setPassword("put your password here");
         loginPage.login();
 
          */

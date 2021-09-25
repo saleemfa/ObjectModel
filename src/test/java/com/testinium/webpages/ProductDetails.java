@@ -26,8 +26,10 @@ public class ProductDetails {
     @FindBy(id = "buy-now")
     WebElement addCartButton;
 
+
     @FindBy(xpath = "//input[@name='buyitnow_adet']")
     WebElement quantity;
+
 
     //Constructor
     public ProductDetails(WebDriver driver)  {
@@ -74,8 +76,10 @@ public class ProductDetails {
 
     public void increaseQuantity()
     {
-        quantity.clear();
-        quantity.sendKeys("2");
+        //quantity.sendKeys("2");
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("document.getElementById('buyitnow_adet').setAttribute('value', '2')");
+
     }
 
     public void addToCart() {
