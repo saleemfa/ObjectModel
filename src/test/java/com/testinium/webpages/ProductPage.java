@@ -13,7 +13,8 @@ public class ProductPage {
     @FindBy(tagName = "h1")
     WebElement heading;
 
-    @FindBy(xpath = "a[title='Sonraki sayfa'] span")
+
+    @FindBy(xpath = "//a[@title='2. sayfa']")
     WebElement nextPage;
 
     List<WebElement> productList;
@@ -29,7 +30,7 @@ public class ProductPage {
 
     public void clickNextPage()
     {
-        nextPage.click();
+        driver.get(driver.getCurrentUrl() +  "&sf=2");
     }
 
 
@@ -40,6 +41,10 @@ public class ProductPage {
                 System.out.print("Link  no = "  +  linkNo);
                 productList.get(linkNo).findElement(By.className("jVhkOY")).click();
 
+    }
+
+    public String getTitle() {
+        return driver.getTitle();
     }
 
 

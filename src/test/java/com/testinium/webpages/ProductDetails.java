@@ -4,9 +4,15 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.*;
+
 
 public class ProductDetails {
     private WebDriver driver;
+
+    //String directory = System.getProperty("user.home");
+    String fileName = "sample.txt";
+    String absolutePath =   fileName;
 
     @FindBy(tagName = "h1")
     WebElement heading;
@@ -20,8 +26,8 @@ public class ProductDetails {
     @FindBy(id = "buy-now")
     WebElement addCartButton;
 
-    @FindBy(xpath = "//a[@aria-label='Adeti Artır']")
-    WebElement plusLink;
+    @FindBy(xpath = "//input[@name='buyitnow_adet']")
+    WebElement quantity;
 
     //Constructor
     public ProductDetails(WebDriver driver)  {
@@ -33,17 +39,51 @@ public class ProductDetails {
 
 
     public void saveProductsDetails() {
-        System.out.println(productDescription.getText());
-        System.out.println(productPrice.getText());
+        //System.out.println(productDescription.getText());
+        //System.out.println(productPrice.getText());
+
+        // Write the content in file
+        try(FileWriter fileWriter = new FileWriter(absolutePath)) {
+            fileWriter.write(productPrice.getText());
+            fileWriter.close();
+        } catch (IOException e) {
+            // Cxception handling
+        }
     }
 
-    public void increaseQuantitiy() {
-        plusLink.click();
-        addToCart();
+    public String readProductInfo()
+    {
+        // Read the content from file
+        String price = "";
+        try(FileReader fileReader = new FileReader(absolutePath))
+        {
+            int ch = fileReader.read();
+            while(ch != -1) {
+                price  = price +  (char)ch;
+                ch = fileReader.read();
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            // Exception handling
+        } catch (IOException e) {
+            // Exception handling
+        }
+
+        return price;
+    }
+
+    public void increaseQuantity()
+    {
+        quantity.clear();
+        quantity.sendKeys("2");
     }
 
     public void addToCart() {
         addCartButton.click();
+    }
+
+    public String getTitle() {
+        return driver.getTitle();
     }
 
 

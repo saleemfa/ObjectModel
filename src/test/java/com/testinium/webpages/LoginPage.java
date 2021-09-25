@@ -35,7 +35,7 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void setUserName(String user)  {
+    public void setHumanUserName(String user)  {
 
         Action seriesOfActions = builder
                 .moveToElement(userName)
@@ -46,7 +46,7 @@ public class LoginPage {
 
     }
 
-    public void setPassword(String pass)  {
+    public void setHumanPassword(String pass)  {
         Action seriesOfActions = builder
                 .moveToElement(password)
                 .contextClick()
@@ -54,6 +54,14 @@ public class LoginPage {
                 .build();
         seriesOfActions.perform() ;
 
+    }
+
+    public void setUserName(String user) {
+        userName.sendKeys(user);
+    }
+
+    public void setPassword(String pass) {
+        password.sendKeys(pass);
     }
 
     public boolean checkPageIsReady() {
@@ -68,6 +76,10 @@ public class LoginPage {
 
     public void login() {
         login_button.submit();
+    }
+
+    public String getTitle() {
+        return driver.getTitle();
     }
 
 

@@ -14,7 +14,13 @@ public class ShoppingCart {
     @FindBy( className = "title-link")
     WebElement currentProduct;
 
-    @FindBy(className = "total-price")
+
+
+    @FindBy(className = "gg-icon-bin-medium")
+    WebElement deleteCart;
+
+
+    @FindBy(xpath = "//div[@class='total-price']")
     WebElement currentPrice;
 
     //Constructor
@@ -25,15 +31,24 @@ public class ShoppingCart {
         PageFactory.initElements(driver, this);
     }
 
+    public void clearCart() {
+        deleteCart.click();
+    }
+
 
 
     public void selectProductCart() {
-        //<select class="amount" data-id="493274739" data-maxamount="9" data-value="3" value="3">
-        //JavascriptExecutor js = (JavascriptExecutor) driver;
-        //js.executeScript("document.getElementsByClassName('amount')[0].setAttribute('data-value', '3')");
-
         currentProduct.click();
+    }
 
+
+    public String getTitle() {
+        return driver.getTitle();
+    }
+
+    public String getCartPrice()
+    {
+        return currentPrice.getText();
     }
 
 

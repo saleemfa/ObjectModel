@@ -45,4 +45,10 @@ public class HomePage {
         loginButton.click();
 
     }
+
+    public String getTitle() {
+        return driver.getTitle();
+    }
+
+
 }
